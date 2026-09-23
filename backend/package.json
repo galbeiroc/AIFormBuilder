@@ -17,9 +17,10 @@
   ],
   "author": "galbeiroc",
   "license": "ISC",
-  "type": "module",
+  "type": "commonjs",
   "devDependencies": {
     "@types/node": "^22.20.2",
+    "@types/pg": "^8.23.1",
     "typescript": "^7.0.2"
   },
   "dependencies": {

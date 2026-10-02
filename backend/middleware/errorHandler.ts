@@ -2,8 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import { ApiError } from "../utils/ApiError";
 import { isProd } from "../config/env";
 
-interface IError<T> extends Error {
-  errors?: T;
+interface IError extends Error {
+  errors?: Error[];
   details?: string;
   statusCode: number;
   code?: number;
@@ -15,8 +15,8 @@ export function notFound(req: Request, _res: Response, next: NextFunction) {
   next(ApiError.notFound(`Route not found: ${req.method} ${req.originalUrl}`));
 }
 
-export function errorHander<T>(
-  err: IError<T>,
+export function errorHander(
+  err: IError,
   _req: Request,
   res: Response,
   _next: NextFunction,

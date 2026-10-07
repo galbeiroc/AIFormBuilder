@@ -1,6 +1,6 @@
 import { query } from "../config/db";
 
-interface IRow {
+export interface IRow {
   id: string;
   name: string;
   email: string;

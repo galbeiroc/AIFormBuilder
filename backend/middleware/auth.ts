@@ -1,0 +1,35 @@
+import { ApiError } from "../utils/ApiError";
+import { verifyToken } from "../utils/token";
+import { asyncHandler } from "./../utils/asyncHandler";
+import { findUserById } from "../repositories/user.repo";
+
+interface TokenPayload {
+    id: string;
+    iat: number;
+    exp: number;
+}
+
+export const auth = asyncHandler(async (req, _res, next) => {
+  const header = req.headers.authorization || "";
+  const token = header.startsWith("Bearer ") ? header.slice(7) : null;
+
+  if (!token) {
+    throw ApiError.unauthorized("Authentication required");
+  }
+
+  let decoded;
+  try {
+    decoded = verifyToken(token) as TokenPayload;
+  } catch {
+    throw ApiError.unauthorized("Invalid or expired token");
+  }
+
+  const user = await findUserById(decoded.id);
+
+  if (!user) {
+    throw ApiError.unauthorized("User no longer exists");
+  }
+
+  req.user = user as typeof req.user;
+  next();
+});

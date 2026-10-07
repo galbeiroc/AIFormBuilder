@@ -4,7 +4,7 @@
   "description": "Backend API for AI Form Builder Saas",
   "main": "server.js",
   "scripts": {
-    "dev": "ts-node server.ts"
+    "dev": "ts-node --files server.ts"
   },
   "keywords": [
     "forms",
@@ -20,6 +20,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^22.20.2",
     "@types/pg": "^8.23.1",
     "ts-node": "^10.9.2",

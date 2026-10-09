@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 
 import { env } from "./config/env";
+import authRoutes from "./routes/auth.routes";
 import { notFound, errorHander } from "./middleware/errorHandler";
 
 const app = express();
@@ -26,6 +27,8 @@ app.get("/api/health", (_req, res) => {
     uptime: process.uptime(),
   });
 });
+
+app.use("/api/v1/auth", authRoutes);
 
 app.use(notFound);
 app.use(errorHander);

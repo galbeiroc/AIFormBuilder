@@ -14,7 +14,7 @@ import { deleteUser } from "../repositories/user.repo";
 
 export const register = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body as TInputUser;
-  if (!name || !email || password)
+  if (!name || !email || !password)
     throw ApiError.badRequest("Name, Email and Password are required");
 
   const { user, token } = await registerUser({ name, email, password });

@@ -28,7 +28,7 @@ app.get("/api/health", (_req, res) => {
   });
 });
 
-app.use("/api/auth", authRoutes);
+app.use("/api/v1/auth", authRoutes);
 
 app.use(notFound);
 app.use(errorHander);

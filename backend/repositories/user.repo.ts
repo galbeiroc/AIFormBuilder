@@ -1,22 +1,7 @@
 import { query } from "../config/db";
+import { IRow, TInputUser, TUser } from "../types/types";
 
-export interface IRow {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  avatar_color: string;
-  created_at: Date;
-}
-
-type TUser = {
-  name: string;
-  email: string;
-  password: string;
-  avatar_color: string;
-};
-
-function mapUser(row: IRow) {
+function mapUser(row: IRow): TUser | null {
   if (!row) return null;
 
   return {
@@ -34,7 +19,7 @@ export async function createUser({
   email,
   password,
   avatar_color,
-}: TUser) {
+}: TInputUser & { avatar_color: string }) {
   const { rows } = await query(
     `
     INSERT INTO users (name, email, password, avatar_color) VALUES ($1, $2, $3, $4) RETURNING *`,

@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { IRow } from "../repositories/user.repo";
+import { TUser } from "../types/types";
 
 export interface IRequest extends Request {
-  user?: IRow;
+  user?: TUser;
 }
 
 export const asyncHandler =
